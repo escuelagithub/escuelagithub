@@ -1,0 +1,32 @@
+{% extends 'base_formularios.html' %}
+{% load static %}
+{% block cursos_centro %}
+
+	<style>
+		.container > .row:first-child {font-size:14pt; font-family: roboto; font-weight: bold;}
+		.cada_fila {font-family: roboto; font-size: 9pt;}
+		.cada_fila a {text-decoration: none;}
+	</style>
+	<div class="container">
+		<div class="row mb-3">
+			<div class="col">
+				Lista Disciplinas
+			</div>
+		</div>
+		{% for disciplina in lista %}
+			<div class="cada_fila row mb-1">
+				<div class="col col-8">
+					{{disciplina.nombre}}
+				</div>
+				<div class="col col-2">
+					<a  href="{% url 'core:editar_disciplina' disciplina.id %}">Editar</a>
+				</div>
+				<div class="col col-2">
+					<a href="{% url 'core:borrar_disciplina' disciplina.id %}">Borrar</a>
+				</div>
+			</div>
+		{% endfor %}
+			<div class="row mt-4">
+				<a class="btn btn-primary btn-block" href="{% url 'core:nueva_disciplina' %}">Nueva Disciplina</a>
+			</div>
+{% endblock %}

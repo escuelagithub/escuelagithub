@@ -1,0 +1,108 @@
+{% extends 'base_formularios.html' %}
+{% load static %}
+{% block cursos_centro %}
+
+	<div class="container">
+		<div class="row mt-5 mb-5">
+			<div class="col">
+				<h1>{{titulo_template}}{{titulo}}</h1>
+			</div>
+		</div>
+		{% include 'includes/manejo_errores.html'%}
+		<div class="row">
+			<div class="col">
+			<form action="" method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				{% include 'includes/curso_controles.html'%}
+			</form>
+			</div>
+		</div>
+
+		<!-- Alcances -->
+
+		<style>
+			.fila_titulo > .col {display: flex;justify-content: center; font-size: 16pt; font-family: roboto; color:darkblue; font-weight: bold;}
+			.fila_columnas {border-bottom: 1pt solid black;border-top: 1pt solid black; font-weight: bold;}
+		</style>
+		<div class="fila_titulo row mb-4">
+			<div class="col">
+				Alcances del Curso
+			</div>
+		</div>
+		<div class="fila_columnas row mb-2">
+			<div class="col-8">Descripcion</div>
+		</div>
+		{% for alcance in lista_alcances %}
+			<div class="row">
+				<div class="col-8">{{alcance.descripcion}}</div>
+				<div class="col col-2">
+					<a  href="{% url 'visitante:editar_alcance' alcance.id %}?curso_id={{curso.id}}">Editar</a>
+				</div>
+				<div class="col col-2">
+					<a href="{% url 'visitante:borrar_alcance' alcance.id %}?curso_id={{curso.id}}">Borrar</a>
+				</div>				
+			</div>
+		{% endfor %}
+
+		<div class="row">
+			<a class="btn btn-secondary" href="{% url 'visitante:nuevo_alcance' %}?curso_id={{curso.id}}">Nuevo Alcance para el Curso</a>
+		</div>		
+
+	<!-- Recomendaciones -->
+
+		<div class="fila_titulo row mb-4">
+			<div class="col">
+				Recomendaciones para el Curso
+			</div>
+		</div>
+		<div class="fila_columnas row mb-2">
+			<div class="col-5">Materia</div>
+			<div class="col-3">Nivel</div>
+		</div>
+		{% for recomendacion in lista_recomendaciones %}
+			<div class="row">
+				<div class="col-5">{{recomendacion.materia}}</div>
+				<div class="col-3">{{recomendacion.nivel}}</div>
+				<div class="col col-2">
+					<a  href="{% url 'visitante:editar_recomendacion' recomendacion.id %}?curso_id={{curso.id}}">Editar</a>
+				</div>
+				<div class="col col-2">
+					<a href="{% url 'visitante:borrar_recomendacion' recomendacion.id %}?curso_id={{curso.id}}">Borrar</a>
+				</div>				
+			</div>
+		{% endfor %}
+		<div class="row mb-5">
+			<a class="btn btn-block btn-secondary mt-2" href="{% url 'visitante:nueva_recomendacion'%}?curso_id={{ curso.id }}">Nueva Recomendacion para el Curso</a>
+		</div>
+
+		<!-- Capitulo -->
+
+		<div class="fila_titulo row mb-4">
+			<div class="col">
+				Capitulos para el Curso
+			</div>
+		</div>
+		<div class="fila_columnas row mb-2">
+			<div class="col-5">Capitulo</div>
+			<div class="col-3">Descripcion</div>
+		</div>
+		{% for capitulo in lista_capitulos %}
+			<div class="row">
+				<div class="col-5">{{capitulo.nombre}}</div>
+				<div class="col-3">
+				<button style="border:none; background-color: transparent; font-weight: bold; color:blue" type="button" class="collapsible">Descripcion</button>
+					<span style="display: none;">{{capitulo.descripcion}}|safe</span>
+				</div>
+				<div class="col col-2">
+					<a  href="{% url 'visitante:editar_capitulo' capitulo.id %}?curso_id={{curso.id}}">Editar</a>
+				</div>
+				<div class="col col-2">
+					<a href="{% url 'visitante:borrar_capitulo' capitulo.id %}?curso_id={{curso.id}}">Borrar</a>
+				</div>				
+			</div>
+		{% endfor %}
+		<div class="row mb-5">
+			<a class="btn btn-block btn-secondary mt-2" href="{% url 'visitante:nuevo_capitulo'%}?curso_id={{ curso.id }}">Nuevo Capitulo para el Curso</a>
+		</div>
+	</div>
+{% endblock %}

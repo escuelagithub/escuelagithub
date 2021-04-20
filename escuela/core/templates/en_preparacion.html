@@ -1,0 +1,33 @@
+{% extends 'base_formularios.html' %}
+{% load static %}
+{% block cursos_centro %}
+
+	<style>
+		.container > .row:first-child {font-size:14pt; font-family: roboto; font-weight: bold;}
+		.cada_fila {font-family: roboto; font-size: 9pt;}
+		.cada_fila a {text-decoration: none;}
+	</style>
+	<div class="container">
+		<div class="row mb-3">
+			<div class="col">
+				Lista cursos en preparacion
+			</div>
+		</div>
+		{% for curso in lista %}
+			<div class="cada_fila row mb-1">
+				<div class="col col-2">
+					{{curso.titulo}}
+				</div>
+				<div class="col col-6">
+					{{curso.descripcion}}
+				</div>
+				<div class="col col-2">
+					<a href="{% url 'visitante:editar_curso' curso.id %}">Editar</a>
+				</div>
+				<div class="col col-2">
+					<a href="{% url 'visitante:borrar_curso' curso.id %}" >Borrar</a>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

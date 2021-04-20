@@ -1,0 +1,17 @@
+{% extends 'base_formularios.html' %}
+{% load static %}
+{% block cursos_centro %}
+<form method="post">{% csrf_token %}
+	<div class="container">
+		<div class="row mb-3">
+			<div class="col">
+				Esta seguro de querer borrar "{{ object }}"?
+			</div>
+		</div>
+		<div class="row">
+			<div class="col"><input type="submit" value="Confirm"></div>
+			<div class="col"><a class="btn btn-primary btn-block" href="{% url 'core:lista_disciplinas' %}">Cancelar</a></div>
+		</div>
+	</div>
+</form>
+{% endblock %}

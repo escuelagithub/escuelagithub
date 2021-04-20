@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+	<meta charset="UTF-8">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+	<title>escuela</title>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}" title="Default Layout">
+	
+	<!-- Bootstrap -->
+	{% include 'includes/css.html'%}
+
+	<style type="text/css">
+		main section:nth-child(3) {display: grid; grid-template-columns: 15% 70% 15%; grid-column-gap: 20px; padding-top: 20px;}
+		main section:nth-child(3) > div:first-child {background-color: transparent;}
+		main section:nth-child(3) > div:first-child + div {background-color: transparent;}
+		main section:nth-child(3) > div:last-of-type {background-color: transparent;}	
+	</style>
+
+
+</head>
+
+<body>
+	<main>
+		{% include 'includes/base_comun.html'%}
+		<section>
+			<div>
+				{% if request.user.is_authenticated %}
+					{% if request.user.is_superuser %}
+						<ul>
+							<li><a href="{% url 'core:lista_disciplinas' %}">Disciplinas</a></li>
+						</ul>
+					{% endif %}
+				{% endif %}
+				{% block cursos_izquierda %}{% endblock %}
+			</div>
+			<div>{% block cursos_centro %}{% endblock %}</div>
+			<div></div>
+		</section>
+	</main>
+
+	{% include 'includes/js.html'%}
+	
+</body>
+</html>

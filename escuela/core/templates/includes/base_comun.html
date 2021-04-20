@@ -1,0 +1,47 @@
+		{% load static %}
+		<section>
+			<div>
+				<img src="{% static 'img/logo.png' %}" alt="">
+			</div>
+			<div>
+				<span>escuela</span>
+			</div>
+		</section>
+		<section>
+			<div>
+				<div>
+					<input id="tx_busqueda" type="text" placeholder="Datos de busqueda">
+				</div>
+				<div>
+					<a id="link_busqueda" href="">
+						<img src="{% static '/img/lupa.png' %}" alt="">
+					</a>
+				</div>
+			</div>
+			<div>
+				{% if request.user.is_authenticated %}
+					{% if request.user.first_name == 'v' or request.user.first_name == 'a' or request.user.first_name == 'p'  or request.user.first_name == 'b'  %}
+						<div><a class="opcion_menu" href="{% url 'visitante:nuevo_curso' %}" >Crear curso</a></div>
+					{% endif %}
+					{% if request.user.first_name == 'a' or request.user.first_name == 'b'  %}
+						<div><a class="opcion_menu" href="{% url 'core:inscripcion' 0 %}">Cursos</a></div>
+					{% endif %}			
+					{% if request.user.first_name == 'p' or request.user.first_name == 'b'  %}
+						<div><a class="opcion_menu" href="{% url 'core:construido' %}">Publicados</a></div>
+						<div><a class="opcion_menu" href="{% url 'core:en_preparacion' %}">En preparacion</a></div>
+						<div><a class="opcion_menu" href="">Ingresos</a></div>
+					{% endif %}
+				{% endif %}
+			</div>
+			<div>
+				<div><a href="{% url 'core:home' %}"><img src="{% static '/img/home.png' %}" alt=""></a></div>
+				{% if not request.user.is_authenticated %}
+					<div><a class="opcion_menu" href="{% url 'registration:registro' %}">Registro</a></div>
+					<div><a class="opcion_menu" href="{% url 'login' %}">Login</a></div>
+				{% else %}
+					<div><a class="opcion_menu" href="{% url 'registration:update_perfil' %}">Perfil</a></div>
+					<div><a class="opcion_menu" href="{% url 'logout' %}">Logout</a></div>
+				{% endif %}
+			</div>
+		</section>
+

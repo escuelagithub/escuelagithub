@@ -1,0 +1,35 @@
+{% extends 'base_formularios.html' %}
+{% load static %}
+{% block cursos_centro %}
+
+	<style type="text/css">
+		.fila {background-color: #ffeded; padding-top: 5px; padding-bottom: 5px;}
+		.fila > .col:first-child img {width: 100%;height: 100%}
+		.fila > .col:first-child {display:flex; align-items: center; justify-content: center;} 
+		.fila > .col:nth-child(2) > .row:first-child {font-size:12pt; font-family: roboto; font-weight: bold;color:#ff0000;}
+		.fila > .col:nth-child(2) > .row:last-child {font-size:10pt; font-family: roboto; color:#000000;}
+	</style>
+	<div  class="cada_curso container ">
+		{% for curso in lista %}
+			<div class="fila row mb-1 border">
+				<div class="col col-2 ">
+					<a href="{% url 'core:detalle_curso' curso.id %}">
+						<img src="{{curso.avatar.url}}" alt="">
+					</a>
+				</div>
+				<div class="col col-10">
+					<div class="row mb-1">
+						<div>
+							{{curso.titulo}}
+						</div>
+					</div>
+					<div class="row">
+						<div>
+							{{curso.descripcion}}
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

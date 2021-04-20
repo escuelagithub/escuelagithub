@@ -1,0 +1,97 @@
+		main {display: grid; grid-template-rows: 50px 40px; grid-row-gap: 3px;}
+		/*main > section {border: 1pt solid black;}*/
+		/* Elemento logo titulo */
+		main section:nth-child(1) {display: grid; grid-template-columns: 30% 70%; grid-column-gap: 3px;}
+		/* logo */
+		main section:first-child > div:first-child img {width: 40px;height: 40px;}
+		/* titulo */
+		main section:first-of-type div:nth-child(1) + div span {font-family: 'eufm10'; font-size: 26pt;}
+		main section:first-of-type div:nth-child(1) {display: flex; justify-content: center; align-items: center; background-color: lightgray;}
+		main section:first-of-type div:nth-child(2) {display: flex; justify-content: center; align-items: center; background-color: #ffddaa;}	
+		main section:nth-child(2) {display: grid; grid-template-columns: 20% 60% 20%; grid-column-gap: 3px;}
+		main section:nth-child(1) + section > div:nth-child(1) {background-color: lightgray; display: flex; justify-content: center;align-items: center;}
+		/* color fondo menu principal */
+		main section:nth-child(1) + section > div:nth-child(2) {background-color: #faddee; display: flex;}
+		/* color fondo menu seguridad */
+		main section:nth-child(1) + section > div:last-child {background-color: #ddffaa; display: flex;}
+		/*main section:nth-child(2) > div:nth-child(2) * {padding-right: 20px;}*/
+		main section:nth-child(2) > div:nth-child(2) {display: flex;  justify-content: space-around; align-items: center;}
+		main section:nth-child(2) > div:nth-child(3) {display: flex;  justify-content: space-around; align-items: center;}
+		/* seccion central */
+		main section:nth-child(3) {display: grid; grid-template-columns: 30% 40% 30%; grid-column-gap: 3px; padding-top: 20px;}
+		main section:nth-child(3) > div:first-child {background-color: transparent;}
+		main section:nth-child(3) > div:first-child + div {background-color: #aaeeff}
+		main section:nth-child(3) > div:last-of-type {background-color: #eeffaa;}
+
+/* Menus */
+
+.opcion_menu {text-decoration: none;}
+.opcion_menu:link {color:black;}
+.opcion_menu:visited {color:darkblue;}
+.opcion_menu:hover {color:#007799;}
+.opcion_menu:active {color:red;}
+
+/* ckeditor */
+.django-ckeditor-widget, .cke_editor_id_descripcion {width: 100% !important}
+.django-ckeditor-widget, .cke_editor_id_texto {width: 100% !important;}
+.django-ckeditor-widget, .cke_editor_id_texto {width: 100% !important;
+}
+
+/* Boton collapsible */
+.collapsible{
+	border:none; 
+	background-color: transparent; 
+	font-weight: bold; 
+	color:blue
+}
+
+	/* Ultimos cursos */
+
+		.cada_ultimo_curso {display: grid; grid-template-columns: 30% 68%; grid-column-gap: 5px; background-color: transparent;}
+		/* avatar del curso*/
+		.cada_ultimo_curso >div:first-child img {width: 100%; height:80%;}
+		/* Centrear el avatar horizontalmente */
+		.cada_ultimo_curso > div:first-child {display: flex; justify-content: center; align-items: center}
+		/* Font de la columna derecha */
+		.cada_ultimo_curso > div:first-child + div {font-size: 8pt; padding-top: 5px;padding-bottom: 5px;}
+		/* Disciplna y precio */
+		.cada_ultimo_curso > div:first-child + div div:nth-child(7) {display: grid; grid-template-columns: 70% 30%;}
+		/* Color y Font del titulo */
+		.cada_ultimo_curso > div:nth-child(2) > div:nth-child(1) {color:red; font-weight: bold;}
+		.cada_ultimo_curso > div:nth-child(2) > div:nth-child(2) {font-size: 6pt; padding-top: 5px; padding-bottom:5px; background-color: #ffeeff;}
+		/* ultima fila */
+		.cada_ultimo_curso > div:nth-child(2) > div:nth-child(7) {padding-top: 5px;}
+		/* Primer div */
+		.ultimos_cursos {display: flex; flex-direction: column; grid-row-gap: 20px;}
+		/* Titulo del listado */
+		.ultimos_cursos > div:first-child {display:flex; justify-content: center; font-size: 15pt;font-weight: bold;}
+		/* div de calificación */
+		.cada_ultimo_curso > div:nth-child(2) > div:nth-child(5) {display: flex; grid-column-gap: 3px;}		
+		/* estrellas */
+		.cada_ultimo_curso > div:nth-child(2) > div:nth-child(5) img {width: 25%; height: 70%}
+
+
+	/* Mejores gratuitos */
+
+		.cada_mejor_gratuito {display: grid; grid-template-columns: 30% 68%; grid-column-gap: 5px; background-color: transparent;}
+		/* avatar del curso*/
+		.cada_mejor_gratuito >div:first-child img {width: 100%; height:80%;}
+		/* Centrear el avatar horizontalmente */
+		.cada_mejor_gratuito > div:first-child {display: flex; justify-content: center; align-items: center}
+		/* Font de la columna derecha */
+		.cada_mejor_gratuito > div:first-child + div {font-size: 8pt; padding-top: 5px;padding-bottom: 5px;}
+		/* Disciplna y precio */
+		.cada_mejor_gratuito > div:first-child + div div:nth-child(7) {display: grid; grid-template-columns: 70% 30%;}
+		/* Color y Font del titulo */
+		.cada_mejor_gratuito > div:nth-child(2) > div:nth-child(1) {color:red; font-weight: bold;}
+		.cada_mejor_gratuito > div:nth-child(2) > div:nth-child(2) {font-size: 6pt; padding-top: 5px; padding-bottom:5px; background-color: #ffeeff;}
+		/* ultima fila */
+		.cada_mejor_gratuito > div:nth-child(2) > div:nth-child(7) {padding-top: 5px;}
+		/* Primer div */
+		.mejores_gratuitos {display: flex; flex-direction: column; grid-row-gap: 20px;}
+		/* Titulo del listado */
+		.mejores_gratuitos > div:first-child {display:flex; justify-content: center; font-size: 15pt;font-weight: bold;}
+		/* div de calificación */
+		.cada_mejor_gratuito > div:nth-child(2) > div:nth-child(5) {display: flex; grid-column-gap: 3px;}		
+		/* estrellas */
+		.cada_mejor_gratuito > div:nth-child(2) > div:nth-child(5) img {width: 25%; height: 70%}		

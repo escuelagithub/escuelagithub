@@ -1,0 +1,23 @@
+{% load static %}
+				<div>
+					<a href="{% url 'core:detalle_curso' curso.id %}">
+						{% if curso.avatar %}
+							<img src="{{curso.avatar.url}}" alt="">
+						{% endif %}
+					</a>
+				</div>
+				<div>
+					<div>{{curso.titulo}}</div>
+					<div>{{curso.descripcion}}</div>
+					<div>Creado: <b>{{curso.created}}</b></div>
+					<div>Profesor: <b>{{curso.profesor}}</b></div>
+					<div>
+						<div>Calificacion: </div>
+						{% include 'includes/estrellas.html'%}					
+					</div>
+					<div>Inscritos: <b>{{curso.alumnos}}</b></div>
+					<div>
+						<div>Disciplina: <b>{{curso.disciplina}}</b></div>
+						<div>$<b>{{curso.precio}}</b></div>
+					</div>
+				</div>

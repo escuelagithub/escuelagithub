@@ -1,0 +1,21 @@
+{% extends 'base_formularios.html' %}
+{% load static %}
+{% block cursos_centro %}
+
+	<div class="container">
+		<div class="row mt-5 mb-5">
+			<div class="col">
+				<h1>{{titulo_template}}{{nombre}}</h1>
+			</div>
+		</div>
+{% include 'includes/manejo_errores.html'%}
+		<div class="row">
+			<div class="col">
+			<form action="." method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+{% include 'includes/alcance_controles.html'%}
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'base_formularios.html' %}
+{% load static %}
+{% block cursos_centro %}
+
+	<div class="container">
+		<div class="row mt-5 mb-5">
+			<div class="col">
+				<h1>Registro de usuarios</h1>			
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<form action="." method="POST" enctype="multipart/form-data">
+		   			{% csrf_token %}
+					<div class="container">
+						<div class="row mb-5">
+							<div class="col col-5">
+								<label for="id_username">Nombre de usuario:</label>	
+							</div>
+							<div class="col col-7">
+								<input class="form-control" type="text" name="username" maxlength="150" autofocus required id="id_username">	
+							</div>
+						</div>
+						<div class="row mb-2">
+							<div class="col">
+								<ul>
+									<li>
+										Obligatorio. Longitud máxima 150 caracteres alfanuméricos. Letras, dígitos y @/./+/-/_ únicamente.
+									</li>
+									<li>
+										Campo requerido y debe ser valido, hasta 254 caracteres como maximo	
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="row mb-4">
+							<div class="col col-5">
+								<label for="id_email">Email:</label>
+							</div>
+							<div class="col col-7">
+								<input class="form-control" type="email" name="email" required id="id_email">
+							</div>
+						</div>
+						<div class="row mb-2">
+							<div class="col">
+								<ul>
+									<li>
+										Su contraseña no puede ser muy similar a su otra información personal.
+									</li>
+									<li>
+										Su contraseña es muy corta. Debe contener al menos 8 caracteres.
+									</li>
+									<li>
+										Su contraseña no puede ser una contraseña de uso común.
+									</li>
+									<li>
+					 					Su contraseña no puede ser completamente numérica.
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="row mb-4">
+							<div class="col col-5"><label for="id_password1">	Contraseña:</label>
+							</div>
+							<div class="col col-7">
+								<input class="form-control" type="password" name="password1" autocomplete="new-password" required id="id_password1">
+							</div>
+						</div>
+						<div class="row mb-4">
+							<div class="col">
+			   					Para verificar, introduzca la misma contraseña que introdujo antes.
+							</div>
+						</div>
+						<div class="row mb-5">
+							<div class="col col-5">
+								<label for="id_password2">
+									Confirmación de contraseña:
+								</label>
+							</div>
+							<div class="col col-7">
+								<input class="form-control" type="password" name="password2" autocomplete="new-password" required id="id_password2">
+							</div>
+						</div>
+						<div class="row mb-5">
+							<input class="btn btn-primary" type="submit" value="Submit">
+						</div>
+					</div>
+				</form>		
+			</div>
+		</div>
+	</div>
+{% endblock %}

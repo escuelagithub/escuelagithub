@@ -1,0 +1,54 @@
+{% extends 'base_formularios.html' %}
+{% load static %}
+{% block cursos_centro %}
+
+	<div class="container">
+		<div class="row mt-5 mb-5">
+			<div class="col">
+				<b>Edicion de Capitulo</b>
+			</div>
+		</div>
+{% include 'includes/manejo_errores.html'%}
+		<div class="row">
+			<div class="col">
+			<form action="." method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+{% include 'includes/capitulo_controles.html'%}
+				</form>
+			</div>
+		</div>
+
+		<style>
+			.fila_titulo > .col {display: flex;justify-content: center; font-size: 16pt; font-family: roboto; color:darkblue; font-weight: bold;}
+			.fila_columnas {border-bottom: 1pt solid black;border-top: 1pt solid black; font-weight: bold;}
+		</style>
+
+		<!-- Temas -->
+
+		<div class="fila_titulo row mb-4">
+			<div class="col">
+				Temas para el Capitulo
+			</div>
+		</div>
+		<div class="fila_columnas row mb-2">
+			<div class="col-5">Tema</div>
+			<div class="col-3">Descripcion</div>
+		</div>
+		{% for tema in lista_temas %}
+			<div class="row">
+				<div class="col-3">{{tema.nombre}}</div>
+				<div class="col-5">{{tema.descripcion|safe}}</div>
+				<div class="col col-2">
+					<a  href="{% url 'visitante:editar_tema' tema.id %}?capitulo_id={{capitulo.id}}&curso_id={{curso.id}}">Editar</a>
+				</div>
+				<div class="col col-2">
+					<a href="{% url 'visitante:borrar_tema' tema.id %}?capitulo_id={{capitulo.id}}&curso_id={{curso.id}}">Borrar</a>
+				</div>				
+			</div>
+		{% endfor %}
+		<div class="row mb-5">
+			<a class="btn btn-block btn-secondary mt-2" href="{% url 'visitante:nuevo_tema'%}?capitulo_id={{ capitulo.id }}">Nuevo Tema para el Capitulo</a>
+		</div>
+		
+	</div>
+{% endblock %}

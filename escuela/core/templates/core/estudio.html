@@ -1,0 +1,219 @@
+{% extends 'base_despliegue.html' %}
+{% load static %}
+{% block cursos_izquierda %}
+<style>
+div.container {
+	height: 500px; 
+	overflow: auto;
+}
+</style>
+
+<style>
+
+.nested {
+display: none;
+}
+
+.active {
+display: block;
+}
+ul, .capitulo {
+list-style-type: none;
+}
+.box::before {
+content: "\2610";
+color: black;
+display: inline-block;
+margin-right: 6px;
+}
+.check-box::before {
+content: "\2611"; 
+color: dodgerblue;
+}
+.box {
+cursor: pointer;
+-webkit-user-select: none; /* Safari 3.1+ */
+-moz-user-select: none; /* Firefox 2+ */
+-ms-user-select: none; /* IE 10+ */
+user-select: none;
+}
+
+</style>
+
+	<div class="capitulos container">
+		<div class="row mb-4">
+			<div class="col">
+				Contenido
+			</div>
+		</div>
+		<div class="row">
+			<ul class="capitulo">
+		        {% for capitulo in capitulos %}
+					<li><span id="capitulo_{{capitulo.id}}" class="box"><a href="#{{capitulo.nombre}}">{{capitulo}}</a></span>
+						<ul class="nested">
+			     			{% for tema in temas %}
+			     		    	{% if tema.capitulo.id  == capitulo.id %}
+									<li>
+										<span id="tema_{{tema.id}}" class="box"><a href="#{{tema.nombre}}">{{tema.nombre}}</a></span>
+										<ul class="nested">
+							     			{% for detalle in detalles %}
+							         			{% if detalle.tema.id == tema.id %}
+													<li>
+														<span id="detalle_{{detalle.id}}" class=”box”><a href="#{{detalle.nombre}}">{{detalle}}</a></span>
+					      
+													</li>
+							        			{% endif %}
+							     			{% endfor %}
+										</ul>
+									</li>
+			         		 	{% endif %}
+			      			{% endfor %}
+						</ul>
+					</li>
+		        {% endfor %}
+			</ul>
+		</div>
+	</div>
+
+<script>
+	var toggler = document.getElementsByClassName("box");
+	var i;
+
+	for (i = 0; i < toggler.length; i++) {
+		toggler[i].addEventListener("click", function() {
+		this.parentElement.querySelector(".nested").classList.toggle("active");
+		this.classList.toggle("check-box");
+		});
+	}
+</script>
+
+{% endblock %}
+{% block cursos_centro %}
+
+	<style>
+		.nombre_capitulo {font-family: roboto; font-weight: bold;font-size: 20pt;}
+		.descripcion_capitulo {padding:15px;background-color: #ffeeff55;}
+		.nombre_tema{font-family: roboto;font-weight: bold;font-size: 16pt;padding-left: 25px;}
+		.descripcion_tema {padding:15px 15px 15px 25px;}
+		.nombre_detalle{font-family: roboto;font-weight: bold;font-size: 14pt;padding-left: 35px;}
+		.descripcion_detalle {padding:25px 25px 25px 35px; font-family: serif;}
+		.texto_detalle{display: flex;justify-content: center;align-items: center;}
+		.referencia {text-align: center;font-weight: bold;}
+		.imagen_detalle{display: flex;justify-content: center;align-items: center;}
+		.url_detalle{display: flex;justify-content: center;align-items: center;}
+		.video_detalle{display: flex;justify-content: center;align-items: center;}
+		.audio_detalle{display: flex;justify-content: center;align-items: center;}
+	</style>
+	
+	<div class="container">
+		{% for objeto in contenido %}
+			{% if objeto.1 == 'capitulo' %}
+				<div class="row mb-2">
+					<div class="col nombre_capitulo">
+						<a name="{{objeto.0.nombre}}">{{objeto.0.nombre}}</a>
+					</div>
+				</div>
+				<div class="row mb-2">
+					<div class="col descripcion_capitulo">
+						{{objeto.0.descripcion|safe}}
+					</div>
+				</div>
+			{% endif %}
+			{% if objeto.1 == 'tema' %}
+				<div class="row mb-2">
+					<div class="col nombre_tema">
+						<a name="{{objeto.0.nombre}}">{{objeto.0.nombre}}</a>
+					</div>
+				</div>
+				<div class="row mb-2">
+					<div class="col descripcion_tema">
+						{{objeto.0.descripcion|safe}}
+					</div>
+				</div>
+			{% endif %}
+			{% if objeto.1 == 'detalle' %}
+				<div class="row mb-2">
+					<div class="col nombre_detalle">
+						<a name="{{objeto.0.nombre}}">{{objeto.0.nombre}}</a>
+					</div>
+				</div>
+				<div class="row mb-2">
+					<div class="col descripcion_detalle">
+						{{objeto.0.descripcion|safe}}
+					</div>
+				</div>
+				{% if objeto.0.texto != '' %}
+					<div class="row">
+						<div class="col texto_detalle">
+							{{objeto.0.texto|safe}}
+						</div>
+					</div>
+					<div class="row mb-5">
+						<div class="col referencia">
+							{{objeto.0.referencia_texto}}
+						</div>
+					</div>
+				{% endif %}
+				{% if objeto.0.dirurl != '' %}
+					<div class="row mb-5">
+						<div class="col url_detalle">
+							<a href="{{objeto.dirurl}}">{{objeto.0.texto}}</a>
+						</div>
+					</div>
+				{% endif %}
+				{% if objeto.0.imagen %}
+					<div class="row mb-1">
+						<div class="col imagen_detalle">
+							<img src="{{objeto.0.imagen.url}}" alt="">
+						</div>
+					</div>
+					<div class="row mb-5">
+						<div class="col referencia">
+							<img src="{{objeto.0.referencia_imagen}}" alt="">
+						</div>
+					</div>
+				{% endif %}
+				{% if objeto.0.tipoarchivo == 'v' %}
+					<div class="row mb-2">
+						<div class="col video_detalle">
+							<video width="400" controls>
+								<source src="{{objeto.0.media.url}}" type="video/mp4">
+							</video>
+						</div>
+					</div>
+					<div class="row mb-5">
+						<div class="col referencia">
+							<img src="{{objeto.0.referencia_media}}" alt="">
+						</div>
+					</div>
+				{% endif %}
+				{% if objeto.0.tipoarchivo == 'a' %}
+					<div class="row">
+						<div class="col audio_detalle">
+							<audio width="400" controls>
+								<source src="{{objeto.0.media.url}}" type="audio/mp3">
+							</audio>
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="col referencia">
+							<img src="{{objeto.0.referencia_media}}" alt="">
+						</div>
+					</div>
+				{% endif %}
+				{% if objeto.0.tipoarchivo == 't' %}
+					<div class="row">
+						<div class="col texto_detalle">
+							<a href="http://127.0.0.1:8000/media/visitante/{{objeto.0.nombrearchivo}}">{{objeto.0.nombre}}</a>
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="col referencia">
+							<img src="{{objeto.0.referencia_media}}" alt="">
+						</div>
+					</div>
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+	</div>
+{% endblock %}

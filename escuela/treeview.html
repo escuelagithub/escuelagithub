@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+<style>
+	.cabecera {display: none;}
+	.active {display: block;}
+	ul {list-style-type: none;}
+	.item::before {content: "\2610"; color: orange; display: inline-block; margin-right: 16px;}
+	.check-item::before {content: "\2611"; color: dodgerblue;}
+</style>
+</head>
+<body>
+	<ul class="capitulo">
+		<li><span class="item">Capitulo</span>
+			<ul class="cabecera">
+				<li><span class="item">Tema 1</span>
+					<ul class="cabecera">
+						<li>Detalle 11</li>
+						<li>Detalle 12</li>
+					</ul>
+				</li>
+				<li><span class="item">Tema 2</span>
+					<ul class="cabecera">
+						<li>Detalle 21</li>
+						<li>Detalle 22</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+
+<script>
+var items = document.getElementsByClassName("item");
+var i;
+
+for (i = 0; i < items.length; i++) {
+	items[i].addEventListener("click", function() {
+	this.parentElement.querySelector(".cabecera").classList.toggle("active");
+	this.classList.toggle("check-item");
+	});
+}
+</script>
+
+</body>
+</html>

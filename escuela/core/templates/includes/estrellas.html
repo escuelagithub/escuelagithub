@@ -1,0 +1,34 @@
+						{% load static %}
+						{% if curso.calificacion == 0 %}
+							<img src="{% static 'img/sinestrellas.png' %}">
+						{% endif %}
+						{% if curso.calificacion > 0 and curso.calificacion <= 0.5 %}
+							<img src="{% static 'img/mediaestrella.png' %}">
+						{% endif %}
+						{% if curso.calificacion > 0.5 and curso.calificacion <= 1 %}
+							<img src="{% static 'img/unaestrella.png' %}">
+						{% endif %}
+						{% if curso.calificacion > 1 and curso.calificacion <= 1.5 %}
+							<img src="{% static 'img/unaymediaestrella.png' %}">
+						{% endif %}
+						{% if curso.calificacion > 1.5 and curso.calificacion <= 2 %}
+							<img src="{% static 'img/dosestrellas.png' %}">
+						{% endif %}
+						{% if curso.calificacion > 2 and curso.calificacion <= 2.5 %}
+							<img src="{% static 'img/dosymediaestrella.png' %}">
+						{% endif %}
+						{% if curso.calificacion > 2.5 and curso.calificacion <= 3 %}
+							<img src="{% static 'img/tresestrellas.png' %}">
+						{% endif %}
+						{% if curso.calificacion > 3 and curso.calificacion <= 3.5 %}
+							<img src="{% static 'img/tresymediaestrella.png' %}">
+						{% endif %}
+						{% if curso.calificacion > 3.5 and curso.calificacion <= 4 %}
+							<img src="{% static 'img/cuatroestrellas.png' %}">
+						{% endif %}
+						{% if curso.calificacion > 4 and curso.calificacion <= 4.5 %}
+							<img src="{% static 'img/cuatroymediaestrella.png' %}">
+						{% endif %}
+						{% if curso.calificacion > 4.5 and curso.calificacion <= 5 %}
+							<img src="{% static 'img/cincoestrellas.png' %}">
+						{% endif %}

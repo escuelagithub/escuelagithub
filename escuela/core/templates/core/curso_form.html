@@ -1,0 +1,43 @@
+{% extends 'base_formularios.html' %}
+{% load static %}
+{% block cursos_centro %}
+
+	<div class="container">
+		<div class="row mt-5 mb-5">
+			<div class="col">
+				<h1>{{titulo_template}}{{titulo}}</h1>
+			</div>
+		</div>
+		{% include 'includes/manejo_errores.html'%}
+		<div class="row">
+			<div class="col">
+			<form action="." method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+				<div class="row mb-1">
+					<div class="col-4"><label>Nombre del Curso:</label></div>
+					<div class="col-8">{{form.titulo}}</div>
+				</div>
+				<div class="row mb-1">
+					<div class="col-4"><label>Descripcion del Curso:</label></div>
+					<div class="col-8">{{form.descripcion}}</div>
+				</div>
+				<div class="row mb-1">
+					<div class="col-4"><label>Logo del Curso:</label></div>
+					<div class="col-8">{{form.avatar}}</div>
+				</div>
+				<div class="row mb-1">
+					<div class="col-4"><label>Disciplina del Curso:</label></div>
+					<div class="col-8">{{form.disciplina}}</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-4"><label>Precio del Curso:</label></div>
+					<div class="col-8">{{form.precio}}</div>
+				</div>
+				<div class="row mb-5">
+					<input class="btn btn-primary" type="submit" value="Grabar">
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

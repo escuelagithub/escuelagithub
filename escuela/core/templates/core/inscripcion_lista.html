@@ -1,0 +1,66 @@
+{% extends 'base_formularios.html' %}
+{% load static %}
+{% block cursos_centro %}
+
+	<style>
+		.container > .row:first-child .col {font-size: 14pt;font-weight: bold;font-family: Roboto;}
+		.container > .row:first-child + .row {border-top: 1pt solid black; border-bottom: 1pt solid black;}
+		.container > .row:nth-child(2) > .col {font-weight: bold;}
+		.fila > .col:first-child img {width: 70%;height: 70%;}
+		.avance {text-align: center;}
+	</style>
+	<div class="container">
+		<div class="row mb-4">
+			<div class="col">
+				Lista de cursos para {{request.user}}
+			</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col col-1">
+				Avatar
+			</div>
+			<div class="col col-2">
+				Titulo
+			</div>
+			<div class="col col-3">
+				Inscrito el
+			</div>
+			<div class="col col-1">
+				Capitulo
+			</div>
+			<div class="col col-1">
+				Tema
+			</div>
+			<div class="col col-1">
+				Detalle
+			</div>
+		</div>
+		{% for inscripcion in lista_inscripciones %}
+			<div class="fila row">
+				<div class="col col-1">
+					{% if inscripcion.curso.avatar %}
+						<img src="{{inscripcion.curso.avatar.url}}" alt="">
+					{% endif %}
+				</div>
+				<div class="col-2">
+					{{inscripcion.curso}}
+				</div>
+				<div class="col-3">
+					{{inscripcion.created}}
+				</div>
+				<div class="avance col-1">
+					{{inscripcion.capitulo}}
+				</div>
+				<div class="avance col-1">
+					{{inscripcion.tema}}
+				</div>
+				<div class="avance col-1">
+					{{inscripcion.detalle}}
+				</div>
+				<div class="col-3" style="text-align: center;">
+					<a href="{% url 'core:estudio' inscripcion.curso.id %}">Ir al curso</a>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

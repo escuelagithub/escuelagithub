@@ -1,0 +1,44 @@
+{% extends 'base_formularios.html' %}
+{% load static %}
+{% block cursos_centro %}
+<div class="container">
+	<div class="row mb-5 mt-4">
+		<h1>Identificacion</h1>
+	</div>
+	<div class="row">
+		<div class="col">
+			<form action="." method="POST">
+				{% csrf_token %}
+				<div class="container">
+					<div class="row mb-3">
+						<div class="col col-4">
+							<label for="id_username">Nombre de usuario:</label>
+						</div>
+						<div class="col col-8">
+							<input class='form-control' type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+						</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col col-4">
+							<label for="id_password">Contraseña:</label>
+						</div>
+						<div class="col col-8">
+							<input class="form-control" type="password" name="password" autocomplete="current-password" required id="id_password">
+						</div>
+					</div>
+					<div class="row mb-4">
+						<input class="btm btn-primary" type="submit" value="Ingresar">
+					</div>
+					<div class="row">
+						<div class="col">
+							Olvido su clave?, Puede restaurarla con este 
+							<a href="/accounts/password_reset/">enlace</a>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

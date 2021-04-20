@@ -1,0 +1,122 @@
+{% extends 'base_formularios.html' %}
+{% load static %}
+{% block cursos_centro %}
+
+	<style type="text/css">
+		#main {display:flex; flex-direction: column; }
+		#main > div:first-child {display: grid; grid-template-columns: 30% 70%;; grid-column-gap: 10px;}
+		#main > div:first-child {background-color: #223344;}
+		#main > div:first-child > div:last-child {display: flex; flex-direction: column; grid-row-gap: 5px;}
+		#main > div:first-child > div:first-child {display: flex; justify-content: center; align-items: center;}
+		#main > div:first-child > div:first-child img {width: 100%;height: 100%;}
+		#main > div:first-child > div:nth-child(2) > div:first-child {color:white; font-family: roboto; font-size: 20pt; font-weight: bold;}
+		#main > div:first-child > div:nth-child(2) > div:nth-child(2) img {width: 100px;height: 25px;}
+		#main > div:first-child > div:nth-child(2) > div:nth-child(2) {color:orange; font-size: 12pt;font-weight: bold;}
+		#main > div:first-child > div:nth-child(2) > div:nth-child(3) .row > div:nth-child(2n+1) {color:white; font-size: 12pt;font-weight: bold;}
+		#main > div:first-child > div:nth-child(2) > div:nth-child(3) .row > div:nth-child(2n) {color:red; font-size: 12pt;font-weight: bold;}
+		#main > div:first-child > div:nth-child(2) > div:nth-child(4) {display: grid; grid-template-columns: 20% 30%}
+		#main > div:first-child > div:nth-child(2) > div:nth-child(4) > div:first-child  {color:white; font-size: 12pt;font-weight: bold; padding-left: 10px;}
+		#main > div:first-child > div:nth-child(2) > div:nth-child(4) > div:last-child {color:red; font-size: 12pt;font-weight: bold;}
+		/* Descripcion */
+		#main > div:nth-child(2) {color:#000000; font-family: sans-serif; background-color: #fff2f4; padding: 10px;}
+		#main > div:nth-child(2) > .row:first-child div {font-size:14pt; font-weight: bold;}
+		#main > div:nth-child(2) > .row:last-child div {font-size:12pt;}
+		@font-face {
+			font-family: "roboto";
+			src: url("{% static 'font/roboto.regular.ttf' %}");
+			}
+	</style>
+
+	<div id="main">
+		<div>
+			<div><img src="{{curso.avatar.url}}" alt=""></div>
+			<div>
+				<div>{{object.titulo}}</div>
+				<div class="container">
+					<div class="row">
+						<div class="col-1 mt-1">{{object.calificacion}}</div>
+						<div class="col">{% include 'includes/estrellas.html' %}</div>
+					</div>	
+				</div>
+				<div class="container">
+					<div class="row">
+						<div class="col-3">Alumnos:</div>
+						<div class="col-3">{{object.alumnos}}</div>
+						<div class="col-3">Reviews:</div>
+						<div class="col-3">{{reviews}}</div>
+					</div>
+				</div>
+				<div>
+					<div>Profesor:</div>
+					<div>{{object.profesor}}</div>
+				</div>
+				<div>
+					{% if estado == 's' %}
+						<a id="inscribirse" class="btn btn-primary btn-block" href="{% url 'core:inscripcion' object.id %}">Inscribirse</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row mb-1">
+				<div class="col">Descripcion</div>
+			</div>
+			<div class="row">
+				<div class="col">{{object.descripcion}}</div>
+			</div>
+		</div>
+		<!-- Alcance  -->
+
+		<style>
+		.alcances > .row > .col {font-size: 14pt; font-family: Roboto; font-weight: bold;}
+		</style>
+
+		<div class="alcances container">
+			<div class="row mt-4 mb-4">
+				<div class="col">Cuando finalices el curso te encontraras preparado para:</div>
+			</div>
+			<ul>
+			{% for alcance in lista_alcances %}
+				<div class="row">
+					<div class="col">
+						<li>{{alcance.descripcion}}</li>
+					</div>	
+				</div>
+			{% endfor %}
+			</ul>
+		</div>
+
+	<!-- Recomendaciones -->
+
+	<style>
+	.recomendaciones {background-color: #ffffaa;}
+	.recomendaciones > .row {padding-top: 10px;}
+	.recomendaciones > .row > .col {font-size: 18pt; font-family: Roboto; font-weight: bold;}
+	.materia::first-letter {font-size: 20pt;}
+	</style>
+
+	<div class="recomendaciones container border mb-4">
+		<div class="row mb-4">
+			<div class="col">Para aprovechar al maximo este curso, es recomendable que tengas conocimiento de lo siguiente:</div>
+		</div>
+		{% for recomendacion in lista_recomendaciones %}
+		<span>
+			<div class="row">
+				<div class="materia col">
+					{{recomendacion.materia}}
+				</div>	
+			</div>
+			<div class="row mb-3">
+				<div class="col">
+					El nivel recomendado es: <b>{{recomendacion.nivel}}</b>
+				</div>	
+			</div>
+		</span>
+		{% endfor %}
+	</div>
+
+		<div>Contenido</div>
+		<div>Reviews</div>
+	</div>
+
+{% endblock %}
